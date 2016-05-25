@@ -43,16 +43,16 @@ public class GameView extends GridLayout {
 				case MotionEvent.ACTION_UP:
 					offSetX = event.getX() - startX;
 					offSetY = event.getY() - startY;
-					if (Math.abs(offSetX)>Math.abs(offSetY)) {
-						if (offSetX<-5) {
+					if (Math.abs(offSetX) > Math.abs(offSetY)) {
+						if (offSetX < -5) {
 							swipeLeft();
-						}else if (offSetX>5) {
+						} else if (offSetX > 5) {
 							swipeRight();
 						}
-					}else{
-						if (offSetY<-5) {
+					} else {
+						if (offSetY < -5) {
 							swipeUp();
-						}else if (offSetY>5) {
+						} else if (offSetY > 5) {
 							swipeDown();
 						}
 					}
@@ -62,46 +62,75 @@ public class GameView extends GridLayout {
 			}
 		});
 	}
+
 	private void swipeUp() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void swipeDown() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void swipeLeft() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	private void swipeRight() {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		super.onSizeChanged(w, h, oldw, oldh);
-		//¿¨Æ¬¿í¶È
-		int cardWidth = (Math.min(w,h)-10)/4;
+		// ¿¨Æ¬¿í¶È
+		int cardWidth = (Math.min(w, h) - 10) / 4;
 		addCards(cardWidth, cardWidth);
+		startGame();
 
 	}
 
-	private void addCards(int cardWidth,int cardHeight) {
+	private void addCards(int cardWidth, int cardHeight) {
 		Card c;
 		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j <4; j++) {
+			for (int j = 0; j < 4; j++) {
 				c = new Card(getContext());
 				c.setNum(0);
-				addView(c, cardWidth,cardHeight);
-				cardsMap[i][j]= c;
+				addView(c, cardWidth, cardHeight);
+				cardsMap[i][j] = c;
 			}
 		}
 	}
-	private Card[][] cardsMap= new Card[4][4];
 
+	private void startGame() {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				cardsMap[i][j].setNum(0);
+			}
+		}
+		addRandomNum();
+		addRandomNum();
 
+	}
+
+	private Card[][] cardsMap = new Card[4][4];
+	private List<Point> emptyPoints = new ArrayList<Point>();
+
+	private void addRandomNum() {
+		emptyPoints.clear();
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (cardsMap[i][j].getNum() <= 0) {
+					emptyPoints.add(new Point(i, j));
+				}
+			}
+		}
+		Point p = emptyPoints.remove((int) (Math.random() * emptyPoints.size()));
+		cardsMap[p.x][p.y].setNum(Math.random() > 0.1 ? 2 : 4);
+	}
+
+	
 }
