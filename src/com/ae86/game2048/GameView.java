@@ -67,104 +67,129 @@ public class GameView extends GridLayout {
 		});
 	}
 
-	private void swipeLeft(){
+	private void swipeLeft() {
+		boolean merge = false;
 		for (int x = 0; x < 4; x++) {
 			for (int y = 0; y < 4; y++) {
-				
-				for (int y1 = y+1; y1 < 4; y1++) {
-					if (cardsMap[x][y1].getNum()>0) {
-						
-						if (cardsMap[x][y].getNum()<=0) {
+
+				for (int y1 = y + 1; y1 < 4; y1++) {
+					if (cardsMap[x][y1].getNum() > 0) {
+
+						if (cardsMap[x][y].getNum() <= 0) {
 							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
 							cardsMap[x][y1].setNum(0);
-							
+
 							y--;
-							
-						}else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+							merge = true;
+						} else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x][y1].setNum(0);
+							MainActivity.getMainActivity().addScore(
+									cardsMap[x][y].getNum());
+							merge = true;
 						}
-						
 						break;
-						
 					}
 				}
 			}
 		}
-		
+		if (merge) {
+			addRandomNum();
+		}
+
 	}
-	private void swipeRight(){
+
+	private void swipeRight() {
+		boolean merge = false;
 		for (int x = 0; x < 4; x++) {
-			for (int y = 3; y >=0; y--) {
-				
-				for (int y1 = y-1; y1 >=0; y1--) {
-					if (cardsMap[x][y1].getNum()>0) {
-						if (cardsMap[x][y].getNum()<=0) {
+			for (int y = 3; y >= 0; y--) {
+
+				for (int y1 = y - 1; y1 >= 0; y1--) {
+					if (cardsMap[x][y1].getNum() > 0) {
+						if (cardsMap[x][y].getNum() <= 0) {
 							cardsMap[x][y].setNum(cardsMap[x][y1].getNum());
 							cardsMap[x][y1].setNum(0);
 							y++;
-						}else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+							merge = true;
+						} else if (cardsMap[x][y].equals(cardsMap[x][y1])) {
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x][y1].setNum(0);
+							MainActivity.getMainActivity().addScore(
+									cardsMap[x][y].getNum());
+							merge = true;
 						}
 						break;
 					}
 				}
 			}
 		}
-		
-		
+		if (merge) {
+			addRandomNum();
+		}
+
 	}
-	private void swipeUp(){
+
+	private void swipeUp() {
+		boolean merge = false;
 		for (int y = 0; y < 4; y++) {
 			for (int x = 0; x < 4; x++) {
-				
-				for (int x1 = x+1; x1 < 4; x1++) {
-					if (cardsMap[x1][y].getNum()>0) {
-						
-						if (cardsMap[x][y].getNum()<=0) {
+
+				for (int x1 = x + 1; x1 < 4; x1++) {
+					if (cardsMap[x1][y].getNum() > 0) {
+
+						if (cardsMap[x][y].getNum() <= 0) {
 							cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
 							cardsMap[x1][y].setNum(0);
-							
+
 							x--;
-							
-						}else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+							merge = true;
+						} else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x1][y].setNum(0);
+							MainActivity.getMainActivity().addScore(
+									cardsMap[x][y].getNum());
+							merge = true;
 						}
-						
+
 						break;
 					}
 				}
 			}
 		}
-		
-	
+		if (merge) {
+			addRandomNum();
+		}
 	}
-	private void swipeDown(){
+
+	private void swipeDown() {
+		boolean merge = false;
 		for (int y = 0; y < 4; y++) {
-			for (int x = 3; x >=0; x--) {
-				
-				for (int x1 = x-1; x1 >=0; x1--) {
-					if (cardsMap[x1][y].getNum()>0) {
-						
-						if (cardsMap[x][y].getNum()<=0) {
+			for (int x = 3; x >= 0; x--) {
+
+				for (int x1 = x - 1; x1 >= 0; x1--) {
+					if (cardsMap[x1][y].getNum() > 0) {
+
+						if (cardsMap[x][y].getNum() <= 0) {
 							cardsMap[x][y].setNum(cardsMap[x1][y].getNum());
 							cardsMap[x1][y].setNum(0);
-							
 							x++;
-						}else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
-							cardsMap[x][y].setNum(cardsMap[x][y].getNum()*2);
+							merge = true;
+						} else if (cardsMap[x][y].equals(cardsMap[x1][y])) {
+							cardsMap[x][y].setNum(cardsMap[x][y].getNum() * 2);
 							cardsMap[x1][y].setNum(0);
+							MainActivity.getMainActivity().addScore(
+									cardsMap[x][y].getNum());
+							merge = true;
 						}
-						
+
 						break;
 					}
 				}
 			}
 		}
-		
-		
+		if (merge) {
+			addRandomNum();
+		}
 	}
 
 	@Override
@@ -197,11 +222,6 @@ public class GameView extends GridLayout {
 		}
 		addRandomNum();
 		addRandomNum();
-		addRandomNum();
-		addRandomNum();
-		addRandomNum();
-		addRandomNum();
-
 	}
 
 	private Card[][] cardsMap = new Card[4][4];
