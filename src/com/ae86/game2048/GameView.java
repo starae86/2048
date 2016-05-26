@@ -3,6 +3,7 @@ package com.ae86.game2048;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -48,18 +49,18 @@ public class GameView extends GridLayout {
 					if (Math.abs(offSetX) > Math.abs(offSetY)) {
 						if (offSetX < -5) {
 							swipeLeft();
-							System.out.println("left");
+//							System.out.println("left");
 						} else if (offSetX > 5) {
 							swipeRight();
-							System.out.println("right");
+//							System.out.println("right");
 						}
 					} else {
 						if (offSetY < -5) {
 							swipeUp();
-							System.out.println("up");
+//							System.out.println("up");
 						} else if (offSetY > 5) {
 							swipeDown();
-							System.out.println("down");
+//							System.out.println("down");
 						}
 					}
 					break;
@@ -245,7 +246,10 @@ public class GameView extends GridLayout {
 		}
 	}
 
-	private void startGame() {
+	void startGame() {
+		MainActivity aty = MainActivity.getMainActivity();
+		aty.clearScore();
+		aty.showBestScore(aty.getBestScore());
 		for (int i = 0; i < 4; i++) {
 			for (int j = 0; j < 4; j++) {
 				cardsMap[i][j].setNum(0);
